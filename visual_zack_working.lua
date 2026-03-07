@@ -63,10 +63,9 @@ background.Visible = false
 background.ZIndex = 1
 background.Active = true
 
--- Чтобы фон перехватывал клики
-background.MouseButton1Click = function() end
-background.MouseButton2Click = function() end
 
+-- Фон просто перехватывает клики (правильный способ)
+background.Active = true
 -- ========== ИКОНКА ==========
 local icon = Instance.new("ImageButton")
 icon.Name = "Icon"
