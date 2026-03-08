@@ -191,60 +191,77 @@ UIS.JumpRequest:Connect(function()
     if infJump then humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end
 end)
 
--- ZACK_HUB V2.0 - УЛЬТРА-ЗАЩИЩЕННАЯ ЧАСТЬ 3
+-- ZACK_HUB V2.0 - УЛЬТРА-ПРЕМИУМ ЧАСТЬ 3 (ФИНАЛ)
+
+-- 1. NOCLIP
+local noclip = false
+createToggle("Noclip", function(state)
+    noclip = state
+    while noclip do
+        RunService.Stepped:Wait()
+        if character then
+            for _, part in pairs(character:GetDescendants()) do
+                if part:IsA("BasePart") then part.CanCollide = false end
+            end
+        end
+    end
+end)
+
+-- 2. INFINITE JUMP
+local infJump = false
+createToggle("Inf Jump", function(state)
+    infJump = state
+end)
+
+UIS.JumpRequest:Connect(function()
+    if infJump then humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end
+end)
+
+-- 3. CHAMS_byZACK (Премиум эффект)
 local chamsActive = false
+local spheres = {} 
 
 createToggle("Chams_byZACK", function(state)
     chamsActive = state
     local Lighting = game:GetService("Lighting")
     
     if state then
-        -- Безопасное отключение объектов Sky
-        for _, obj in pairs(Lighting:GetChildren()) do
-            if obj:IsA("Sky") then
-                pcall(function() obj.Enabled = false end)
-            end
-        end
+        -- Попытка затемнить мир
         pcall(function() Lighting.Ambient = Color3.fromRGB(0, 0, 0) end)
         pcall(function() Lighting.OutdoorAmbient = Color3.fromRGB(0, 0, 0) end)
         
-        -- Сферы
         local head = character:FindFirstChild("Head")
         if head then
             for i = 1, 3 do
                 local ball = Instance.new("Part")
                 ball.Shape = Enum.PartType.Ball
-                ball.Size = Vector3.new(0.6, 0.6, 0.6)
+                ball.Size = Vector3.new(0.7, 0.7, 0.7)
                 ball.Material = Enum.Material.Neon
                 ball.Name = "ZackSphere"
                 ball.CanCollide = false
+                ball.Anchored = false
                 ball.Parent = head
+                
+                table.insert(spheres, ball)
                 
                 task.spawn(function()
                     while chamsActive and ball and ball.Parent do
                         ball.Color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
-                        ball.CFrame = head.CFrame * CFrame.Angles(0, (tick() * 2) + (i * 2.1), 0) * CFrame.new(2, 0, 0)
+                        local angle = (tick() * 3) + (i * (math.pi * 2 / 3))
+                        ball.CFrame = head.CFrame * CFrame.new(math.cos(angle) * 2, 0, math.sin(angle) * 2)
                         RunService.RenderStepped:Wait()
                     end
                 end)
             end
         end
     else
-        -- Возврат освещения с защитой
-        for _, obj in pairs(Lighting:GetChildren()) do
-            if obj:IsA("Sky") then
-                pcall(function() obj.Enabled = true end)
-            end
-        end
+        -- Возврат освещения
         pcall(function() Lighting.Ambient = Color3.fromRGB(128, 128, 128) end)
         pcall(function() Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128) end)
         
-        -- Удаление сфер
-        local head = character:FindFirstChild("Head")
-        if head then
-            for _, obj in pairs(head:GetChildren()) do
-                if obj.Name == "ZackSphere" then obj:Destroy() end
-            end
+        for _, s in pairs(spheres) do
+            if s then s:Destroy() end
         end
+        spheres = {}
     end
 end)
