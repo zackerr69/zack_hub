@@ -1,2 +1,3 @@
 # zack_hub
-ВЫБИРАЕМ zack_hub @sajkyn
+ВЫБИРАЕМ zack_hub 
+наш телеграмм канал @sajkyn, подписывайтесь
