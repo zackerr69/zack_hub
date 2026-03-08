@@ -47,7 +47,9 @@ local ANIME_GIRL_ID = "13978511301" -- Этот ID точно работает
 -- ========== ГЛАВНОЕ МЕНЮ ==========
 local gui = Instance.new("ScreenGui")
 gui.Name = "ZACK_VISUAL"
-gui.Parent = playerGui
+gui.Parent = game:GetService("CoreGui")  -- ← ЭТО ЗАМЕНИЛ
+gui.Enabled = true                        -- ← ЭТО ДОБАВЬ
+gui.IgnoreGuiInset = true                  -- ← ЭТО ДОБАВЬ
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.DisplayOrder = 100
