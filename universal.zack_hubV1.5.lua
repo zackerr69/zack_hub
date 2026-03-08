@@ -28,7 +28,7 @@ local bgImage = Instance.new("ImageLabel")
 bgImage.Size = UDim2.new(1, 0, 1, 0)
 bgImage.Image = "rbxassetid://14451457100" -- ID аниме-тян (можно сменить)
 bgImage.ImageTransparency = 0.6 -- Чтобы текст был виден
-bgImage.ScaleType = Enum.ScaleType.Fill
+bgImage.ScaleType = Enum.ScaleType.Stretch
 bgImage.Parent = main
 
 -- Радужный заголовок
