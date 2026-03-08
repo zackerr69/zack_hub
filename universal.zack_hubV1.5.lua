@@ -191,21 +191,23 @@ UIS.JumpRequest:Connect(function()
     if infJump then humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end
 end)
 
--- ZACK_HUB V2.0 - FIX для CHAMS
+-- ZACK_HUB V2.0 - FIX ДЛЯ CHAMS И НЕБА
 local chamsActive = false
 createToggle("Chams_byZACK", function(state)
     chamsActive = state
     local Lighting = game:GetService("Lighting")
     
     if state then
-        -- Черное небо (отключаем существующие объекты Sky)
+        -- Безопасное отключение неба
         for _, obj in pairs(Lighting:GetChildren()) do
-            if obj:IsA("Sky") then obj.Enabled = false end
+            if obj:IsA("Sky") then
+                pcall(function() obj.Enabled = false end) -- pcall предотвращает ошибку
+            end
         end
         Lighting.Ambient = Color3.fromRGB(0, 0, 0)
         Lighting.OutdoorAmbient = Color3.fromRGB(0, 0, 0)
         
-        -- Сферы (создаем их как отдельные части)
+        -- Сферы
         for i = 1, 3 do
             local ball = Instance.new("Part")
             ball.Shape = Enum.PartType.Ball
@@ -216,8 +218,7 @@ createToggle("Chams_byZACK", function(state)
             ball.Parent = character:FindFirstChild("Head")
             
             task.spawn(function()
-                while chamsActive and ball.Parent do
-                    -- Радужный цвет и вращение
+                while chamsActive and ball and ball.Parent do
                     ball.Color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
                     ball.CFrame = character.Head.CFrame * CFrame.Angles(0, (tick() * 2) + (i * 2.1), 0) * CFrame.new(2, 0, 0)
                     RunService.RenderStepped:Wait()
@@ -227,14 +228,19 @@ createToggle("Chams_byZACK", function(state)
     else
         -- Возврат освещения
         for _, obj in pairs(Lighting:GetChildren()) do
-            if obj:IsA("Sky") then obj.Enabled = true end
+            if obj:IsA("Sky") then
+                pcall(function() obj.Enabled = true end)
+            end
         end
         Lighting.Ambient = Color3.fromRGB(128, 128, 128)
         Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
         
         -- Удаление сфер
-        for _, obj in pairs(character:FindFirstChild("Head"):GetChildren()) do
-            if obj.Name == "ZackSphere" then obj:Destroy() end
+        local head = character:FindFirstChild("Head")
+        if head then
+            for _, obj in pairs(head:GetChildren()) do
+                if obj.Name == "ZackSphere" then obj:Destroy() end
+            end
         end
     end
 end)
