@@ -79,6 +79,15 @@ icon.Draggable = true
 icon.Active = true
 icon.ZIndex = 10
 icon.Visible = true
+icon.Visible = true
+-- ⬇️ ВОТ СЮДА ВСТАВЛЯЙ ⬇️
+icon.Active = true
+icon.ZIndex = 999
+icon.Draggable = true
+print("✅ Иконка создана с координатами: 20,20")
+-- ⬆️ ВСТАВИЛ ⬆️
+
+-- Обводка иконки
 
 -- Обводка иконки
 local iconStroke = Instance.new("UICorner")
