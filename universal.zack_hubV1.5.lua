@@ -191,44 +191,49 @@ UIS.JumpRequest:Connect(function()
     if infJump then humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end
 end)
 
--- 3. CHAMS_byZACK (Сферы, Черное небо, Эффект коньков)
+-- ZACK_HUB V2.0 - FIX для CHAMS
 local chamsActive = false
 createToggle("Chams_byZACK", function(state)
     chamsActive = state
-    local sky = game:GetService("Lighting"):FindFirstChildOfClass("Sky")
+    local Lighting = game:GetService("Lighting")
     
     if state then
-        -- Черное небо
-        if sky then sky.Enabled = false end
-        game:GetService("Lighting").Ambient = Color3.fromRGB(0, 0, 0)
-        game:GetService("Lighting").OutdoorAmbient = Color3.fromRGB(0, 0, 0)
+        -- Черное небо (отключаем существующие объекты Sky)
+        for _, obj in pairs(Lighting:GetChildren()) do
+            if obj:IsA("Sky") then obj.Enabled = false end
+        end
+        Lighting.Ambient = Color3.fromRGB(0, 0, 0)
+        Lighting.OutdoorAmbient = Color3.fromRGB(0, 0, 0)
         
-        -- Сферы вокруг головы
+        -- Сферы (создаем их как отдельные части)
         for i = 1, 3 do
-            local ball = Instance.new("Part", character.Head)
+            local ball = Instance.new("Part")
             ball.Shape = Enum.PartType.Ball
-            ball.Size = Vector3.new(0.5, 0.5, 0.5)
+            ball.Size = Vector3.new(0.6, 0.6, 0.6)
             ball.Material = Enum.Material.Neon
             ball.Name = "ZackSphere"
+            ball.CanCollide = false
+            ball.Parent = character:FindFirstChild("Head")
+            
             task.spawn(function()
-                while chamsActive do
+                while chamsActive and ball.Parent do
+                    -- Радужный цвет и вращение
                     ball.Color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
-                    ball.CFrame = character.Head.CFrame * CFrame.Angles(0, tick() * 2 + (i * 2), 0) * CFrame.new(2, 0, 0)
+                    ball.CFrame = character.Head.CFrame * CFrame.Angles(0, (tick() * 2) + (i * 2.1), 0) * CFrame.new(2, 0, 0)
                     RunService.RenderStepped:Wait()
                 end
             end)
         end
-        
-        -- Анимация "на коньках" (делаем плавным трение)
-        for _, part in pairs(character:GetChildren()) do
-            if part:IsA("BasePart") then part.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0) end
-        end
     else
-        -- Возврат к нормальному состоянию
-        if sky then sky.Enabled = true end
-        game:GetService("Lighting").Ambient = Color3.fromRGB(128, 128, 128)
-        game:GetService("Lighting").OutdoorAmbient = Color3.fromRGB(128, 128, 128)
-        for _, obj in pairs(character.Head:GetChildren()) do
+        -- Возврат освещения
+        for _, obj in pairs(Lighting:GetChildren()) do
+            if obj:IsA("Sky") then obj.Enabled = true end
+        end
+        Lighting.Ambient = Color3.fromRGB(128, 128, 128)
+        Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+        
+        -- Удаление сфер
+        for _, obj in pairs(character:FindFirstChild("Head"):GetChildren()) do
             if obj.Name == "ZackSphere" then obj:Destroy() end
         end
     end
