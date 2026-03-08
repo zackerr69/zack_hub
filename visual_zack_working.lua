@@ -2125,3 +2125,53 @@ print("   • Сохранения: Авто")
 print("   • Оптимизация: Включена")
 print("💎 СТАТУС: РАБОЧАЯ ВЕРСИЯ | ВЕРСИЯ: 1.1")
 print("📱 Telegram: @sajkyn")
+-- ========== ЭКСТРЕННОЕ ВОССТАНОВЛЕНИЕ GUI ==========
+spawn(function()
+    wait(3)
+    print("🔄 ЭКСТРЕННОЕ ВОССТАНОВЛЕНИЕ ИНТЕРФЕЙСА...")
+    
+    -- Принудительно пересоздаём иконку
+    local success, err = pcall(function()
+        if not icon or not icon.Parent then
+            print("⚠️ Иконка не существует, создаём заново")
+            local newIcon = Instance.new("ImageButton")
+            newIcon.Name = "Icon"
+            newIcon.Parent = gui
+            newIcon.Size = UDim2.new(0, 64, 0, 64)
+            newIcon.Position = UDim2.new(0, 20, 0, 20)
+            newIcon.BackgroundTransparency = 1
+            newIcon.Image = "rbxassetid://13978511301"
+            newIcon.ImageRectSize = Vector2.new(64, 64)
+            newIcon.Draggable = true
+            newIcon.Active = true
+            newIcon.ZIndex = 999
+            newIcon.Visible = true
+            icon = newIcon
+        else
+            print("✅ Иконка существует, делаем видимой")
+            icon.Visible = true
+            icon.Position = UDim2.new(0, 20, 0, 20)
+            icon.ZIndex = 999
+        end
+        
+        -- Принудительно включаем GUI
+        gui.Enabled = true
+        gui.DisplayOrder = 999
+        
+        -- Проверяем меню
+        if menu then
+            menu.Visible = false
+        end
+    end)
+    
+    if success then
+        print("✅ ИНТЕРФЕЙС ВОССТАНОВЛЕН! Иконка в 20,20")
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "ZACK VISUAL",
+            Text = "Иконка должна появиться! Нажми F9 чтобы проверить консоль",
+            Duration = 5
+        })
+    else
+        print("❌ Ошибка восстановления: " .. tostring(err))
+    end
+end)
