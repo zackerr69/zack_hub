@@ -191,49 +191,53 @@ UIS.JumpRequest:Connect(function()
     if infJump then humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end
 end)
 
--- ZACK_HUB V2.0 - FIX ДЛЯ CHAMS И НЕБА
+-- ZACK_HUB V2.0 - УЛЬТРА-ЗАЩИЩЕННАЯ ЧАСТЬ 3
 local chamsActive = false
+
 createToggle("Chams_byZACK", function(state)
     chamsActive = state
     local Lighting = game:GetService("Lighting")
     
     if state then
-        -- Безопасное отключение неба
+        -- Безопасное отключение объектов Sky
         for _, obj in pairs(Lighting:GetChildren()) do
             if obj:IsA("Sky") then
-                pcall(function() obj.Enabled = false end) -- pcall предотвращает ошибку
+                pcall(function() obj.Enabled = false end)
             end
         end
-        Lighting.Ambient = Color3.fromRGB(0, 0, 0)
-        Lighting.OutdoorAmbient = Color3.fromRGB(0, 0, 0)
+        pcall(function() Lighting.Ambient = Color3.fromRGB(0, 0, 0) end)
+        pcall(function() Lighting.OutdoorAmbient = Color3.fromRGB(0, 0, 0) end)
         
         -- Сферы
-        for i = 1, 3 do
-            local ball = Instance.new("Part")
-            ball.Shape = Enum.PartType.Ball
-            ball.Size = Vector3.new(0.6, 0.6, 0.6)
-            ball.Material = Enum.Material.Neon
-            ball.Name = "ZackSphere"
-            ball.CanCollide = false
-            ball.Parent = character:FindFirstChild("Head")
-            
-            task.spawn(function()
-                while chamsActive and ball and ball.Parent do
-                    ball.Color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
-                    ball.CFrame = character.Head.CFrame * CFrame.Angles(0, (tick() * 2) + (i * 2.1), 0) * CFrame.new(2, 0, 0)
-                    RunService.RenderStepped:Wait()
-                end
-            end)
+        local head = character:FindFirstChild("Head")
+        if head then
+            for i = 1, 3 do
+                local ball = Instance.new("Part")
+                ball.Shape = Enum.PartType.Ball
+                ball.Size = Vector3.new(0.6, 0.6, 0.6)
+                ball.Material = Enum.Material.Neon
+                ball.Name = "ZackSphere"
+                ball.CanCollide = false
+                ball.Parent = head
+                
+                task.spawn(function()
+                    while chamsActive and ball and ball.Parent do
+                        ball.Color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
+                        ball.CFrame = head.CFrame * CFrame.Angles(0, (tick() * 2) + (i * 2.1), 0) * CFrame.new(2, 0, 0)
+                        RunService.RenderStepped:Wait()
+                    end
+                end)
+            end
         end
     else
-        -- Возврат освещения
+        -- Возврат освещения с защитой
         for _, obj in pairs(Lighting:GetChildren()) do
             if obj:IsA("Sky") then
                 pcall(function() obj.Enabled = true end)
             end
         end
-        Lighting.Ambient = Color3.fromRGB(128, 128, 128)
-        Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+        pcall(function() Lighting.Ambient = Color3.fromRGB(128, 128, 128) end)
+        pcall(function() Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128) end)
         
         -- Удаление сфер
         local head = character:FindFirstChild("Head")
