@@ -39,25 +39,42 @@ local joystick = {
 }
 
 -- Создание кнопки "ZACK_FLY"
+-- Экран
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ZACK_Fly_Gui"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = player.PlayerGui
 
--- Основная кнопка (стиль: прозрачный фон, белая обводка, радужный текст)
+-- Кнопка (ПРАВИЛЬНЫЕ СВОЙСТВА)
 local flyButton = Instance.new("TextButton")
 flyButton.Name = "ZACK_Fly_Button"
 flyButton.Size = UDim2.new(0, 200, 0, 60)
 flyButton.Position = UDim2.new(0.5, -100, 0.9, -30)
 flyButton.BackgroundTransparency = 0.8
 flyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-flyButton.BorderSizePixel = 2
+
+-- ВАЖНО: правильные свойства рамки
+flyButton.BorderSizePixel = 2  -- вместо BorderSize
 flyButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+
 flyButton.Text = "ZACK_FLY"
 flyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 flyButton.TextScaled = true
 flyButton.Font = Enum.Font.GothamBold
 flyButton.Parent = screenGui
+
+-- Уведомление (Frame)
+local notification = Instance.new("Frame")
+notification.Size = UDim2.new(0, 250, 0, 60)
+notification.Position = UDim2.new(1, -260, 1, -70)
+notification.BackgroundTransparency = 0.9
+notification.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+
+-- И здесь правильно
+notification.BorderSizePixel = 2
+notification.BorderColor3 = Color3.fromRGB(255, 255, 255)
+
+notification.Parent = screenGui
 
 -- Радужный текст (анимация)
 spawn(function()
