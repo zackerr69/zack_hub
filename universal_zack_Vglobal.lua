@@ -17,7 +17,7 @@
     BUILD: HYDRA_V1
 --]]
 
--- ОСНОВНОЙ GUI (ДОЛЖЕН БЫТЬ ПЕРВЫМ)
+-- ОСНОВНОЙ GUI
 local a = Instance.new("ScreenGui")
 a.Name = "ZH"
 a.Parent = game:GetService("CoreGui")
@@ -61,7 +61,7 @@ d.Position = UDim2.new(1,-70,0,10)
 d.Text = "X"
 d.TextColor3 = Color3.fromRGB(225,225,225)
 d.Font = Enum.Font.GothamBold
-d.TextScaled = true
+d.TextScaled = truetrue
 --[ZACK_HUB] ЧАСТЬ 2 — КНОПКИ ТАБОВ (ПЕРВЫЙ СЛОЙ МАСКИРОВКИ)
 
 local e = Instance.new("TextButton")
