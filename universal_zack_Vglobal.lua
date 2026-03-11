@@ -61,7 +61,7 @@ d.Position = UDim2.new(1,-70,0,10)
 d.Text = "X"
 d.TextColor3 = Color3.fromRGB(225,225,225)
 d.Font = Enum.Font.GothamBold
-d.TextScaled = truetrue
+d.TextScaled = true
 --[ZACK_HUB] ЧАСТЬ 2 — КНОПКИ ТАБОВ (ПЕРВЫЙ СЛОЙ МАСКИРОВКИ)
 
 local e = Instance.new("TextButton")
