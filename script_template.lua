@@ -16,7 +16,7 @@
     TG: @sajkyn
 --]]
 
-local BOT_API_URL = "http://192.168.1.100:5000"
+local BOT_API_URL = "https://bot-united--waxe4495.replit.app"
 
 local function httpPost(path, data)
     local url = BOT_API_URL .. path
