@@ -18,8 +18,8 @@ local coreGui = game:GetService("CoreGui")
 -- ==================== ИКОНКА Z_H ====================
 local icon = Instance.new("TextButton")
 icon.Parent = coreGui
-icon.BackgroundTransparency = 0.2
-icon.BackgroundColor3 = Color3.fromRGB(10,10,10)
+icon.BackgroundTransparency = 0
+icon.BackgroundColor3 = Color3.fromRGB(0,255,0)
 icon.BorderSizePixel = 3
 icon.BorderColor3 = Color3.fromRGB(255,255,255)
 icon.Size = UDim2.new(0, 80, 0, 80)
