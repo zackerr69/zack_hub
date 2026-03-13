@@ -1,4 +1,3 @@
-local BOT_API_URL = "https://bot-united--waxe4495.replit.app"
 local function httpPost(path, data)
     local url = BOT_API_URL .. path
     local json = game:GetService("HttpService"):JSONEncode(data)
