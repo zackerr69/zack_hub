@@ -1,3 +1,12 @@
+-- Ждём, пока игрок появится
+repeat wait() until game:GetService("Players").LocalPlayer
+repeat wait() until game:GetService("Players").LocalPlayer.Character
+repeat wait() until game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+local player = game:GetService("Players").LocalPlayer
+local character = player.Character
+local humanoid = character:WaitForChild("Humanoid")
+local rootPart = character:WaitForChild("HumanoidRootPart")
 -- ============================================================
 --  DELTA X / ROBLOX EXPLOIT · АДАПТИРОВАННАЯ ВЕРСИЯ
 --  Исходник: StyleMenu (Claude, Roblox Studio)
